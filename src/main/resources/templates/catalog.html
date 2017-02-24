@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorator="model/model">
+<head>
+<meta charset="UTF-8" />
+<title>catalog</title>
+
+</head>
+<body>
+	<div th:fragment="content" th:remove="tag">
+		<link rel="stylesheet" href="zTreeStyle/zTreeStyle.css" type="text/css" />
+		<div>
+			<input type="text" id="pnode" />
+			<input type="button" value="add" id="add"/>
+		</div>
+		<ul id="tree" class="ztree" style="width: 260px; overflow: auto;"></ul>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.ztree.all.js"></script>
+		<script>
+		var zTreeObj;
+		// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+		var setting = {
+			edit : {
+				enable : true,
+				showRenameBtn : true
+			},
+			view : {
+				addHoverDom : addHoverDom,
+				removeHoverDom : removeHoverDom,
+				/* fontCss: {"size":"24px"} */
+			}
+		};
+		// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+		var zNodes = [ {
+			name : "test1",
+			open : true,
+			children : [ {
+				name : "test1_1"
+			}, {
+				name : "test1_2"
+			} ]
+		}, {
+			name : "test2",
+			open : true,
+			children : [ {
+				name : "test2_1"
+			}, {
+				name : "test2_2"
+			} ]
+		} ];
+		
+		function addHoverDom(treeId, treeNode){
+			
+		}
+		
+		function removeHoverDom(treeId, treeNode){
+			
+		}
+		
+		function addNodes(treeId,newNodes){
+			treeId = treeId?treeId:0;
+			newNodes = treeObj.addNodes(treeId, newNodes);
+		}
+		$(document).ready(function() {
+			//alert("ok1");
+			zTreeObj = $.fn.zTree.init($("#tree"), setting, zNodes);
+			
+			$("#add").click(function(){
+				var node = $("#pnode").val();
+				ajaxFunc("catalog/insert",{name:node,parentId:0,sort:1},callBack);
+			});
+		});
+		function callBack(rdata){
+			
+		}
+	</script>
+	</div>
+</body>
+</html>
