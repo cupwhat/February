@@ -29,7 +29,7 @@ public class CatalogController {
 	@ResponseBody
 	public String insert(Catalog catalog){
 		Map<String,Object> resultMap = new HashMap<String,Object>();
-		catalogService.insertCatLog(catalog);
+		catalogService.insertCatlog(catalog);
 		return JSON.toJSONString(resultMap);
 	}
 	
